@@ -7,9 +7,11 @@ from .schemas import BookSchema
 class BookOrm:
 
     @staticmethod
-    async def get_books(session: AsyncSession, offset: int):
-        stmt = select(Book).limit(12).offset(offset)
+    async def get_books(session: AsyncSession, offset: int, limit: int):
+        stmt = select(Book).limit(limit).offset(offset)
         result_row = await session.execute(stmt)
-        result = result_row.scalars().all()
-        return [BookSchema.model_validate(book) for book in result]
-
+        if result_row:
+            result = result_row.scalars().all()
+            return [BookSchema.model_validate(book) for book in result]
+        else:
+            return None
