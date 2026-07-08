@@ -1,0 +1,10 @@
+#back
+backEnd/.idea/
+backEnd/.env
+backEnd/__pycache__/
+backEnd/test.py
+backend/**/*.pyc
+
+#IDE
+.vscode/
+.idea/
