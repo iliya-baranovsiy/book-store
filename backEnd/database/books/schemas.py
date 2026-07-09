@@ -17,3 +17,9 @@ class BookSchema(BaseModel):
     model_config = ConfigDict(
         from_attributes=True
     )
+
+
+class BooksResponseSchema(BaseModel):
+    items: list[BookSchema] | None
+    total: int
+    pages: int

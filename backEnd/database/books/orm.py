@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import select, func
 from database.books.models import Book
 from .schemas import BookSchema
 
@@ -15,3 +15,9 @@ class BookOrm:
             return [BookSchema.model_validate(book) for book in result]
         else:
             return None
+
+    @staticmethod
+    async def get_all_books_count(session: AsyncSession):
+        stmt = select(func.count()).select_from(Book)
+        result = await session.execute(stmt)
+        return result.scalars().first()
