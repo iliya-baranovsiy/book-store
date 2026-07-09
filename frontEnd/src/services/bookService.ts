@@ -1,8 +1,8 @@
 import { api } from "../api/axios";
-import type { TBook } from "../types/book.types";
+import type { TBookResponse } from "../types/book.types";
 
-export async function getAllBooks(page: number): Promise<TBook[]>{
-    const response = await api.get<TBook[]>("/books",{
+export async function getAllBooks(page: number): Promise<TBookResponse>{
+    const response = await api.get<TBookResponse>("/books",{
         params: {
             page
         }

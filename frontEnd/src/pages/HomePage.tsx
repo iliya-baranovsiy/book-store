@@ -6,14 +6,14 @@ export default function HomePage() {
 
   const page = Number(searchParams.get("page") ?? 1);
 
-  const { data: books, isLoading } = useBooks(page);
+  const { data: response, isLoading } = useBooks(page);
 
   if (isLoading) {
     return <div>Загрузка...</div>;
   }
   return (
     <div>
-      {books?.map((book) => (
+      {response?.items.map((book) => (
         <div key={book.id}>{book.title}</div>
       ))}
     </div>
