@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     postgres_port: int
     postgres_user: str
     postgres_password: str
+    allow_origins: str
 
     model_config = SettingsConfigDict(
         env_file=".env",
