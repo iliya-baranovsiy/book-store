@@ -5,7 +5,7 @@ import SavedIcon from "../assets/icons/saved.png";
 
 export default function IconsSet() {
   return (
-    <div>
+    <div className="flex flex-row gap-2">
       <Link to={"/saved"}>
         <img src={SavedIcon} alt="saved"></img>
       </Link>

@@ -1,1 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --font-head: "Bebas Neue", sans-serif;
+  --color-black: #313037;
+  --color-grey: #e7e7e7;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
