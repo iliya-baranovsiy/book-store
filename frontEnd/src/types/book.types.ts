@@ -8,7 +8,7 @@ export type TBook = {
   format: string;
   rating: number;
   cost: number;
-  pictureUrl: string;
+  picture_url: string;
 };
 
 export type TBookResponse = {

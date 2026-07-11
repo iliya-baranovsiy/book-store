@@ -5,6 +5,11 @@
   --font-head: "Bebas Neue", sans-serif;
   --color-black: #313037;
   --color-grey: #e7e7e7;
+  --color-blue: #D7E4FD;
+  --color-green: #CAEFF0;
+  --color-purple: #F4EEFD;
+  --color-orange: #FEE9E2;
+  --color-greytext: #A8A8A8;
 }
 
 input[type="search"]::-webkit-search-cancel-button {

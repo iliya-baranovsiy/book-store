@@ -1,5 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import { useBooks } from "../hooks/useBooks";
+import ContainerTtitle from "../components/containerTtitle";
+import BooksContainer from "../components/booksContainer";
 
 export default function HomePage() {
   const [searchParams] = useSearchParams();
@@ -12,10 +14,9 @@ export default function HomePage() {
     return <div>Загрузка...</div>;
   }
   return (
-    <div>
-      {response?.items.map((book) => (
-        <div key={book.id}>{book.title}</div>
-      ))}
-    </div>
+    <>
+      <ContainerTtitle />
+      <BooksContainer data={response!}/>
+    </>
   );
 }
