@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import ContainerTtitle from "../components/containerTtitle";
 import BooksContainer from "../components/booksContainer";
 import Pagination from "../components/pagination/paginationComponent";
+import SubscribeFormComponent from "../components/subscribeForm";
 
 export default function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -27,6 +28,7 @@ export default function HomePage() {
       <ContainerTtitle />
       <BooksContainer data={response!} />
       <Pagination page={page} totalPages={response!.pages} setPage={(page) => setSearchParams({page: String(page)})}/>
+      <SubscribeFormComponent></SubscribeFormComponent>
     </>
   );
 }
