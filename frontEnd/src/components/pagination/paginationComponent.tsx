@@ -3,6 +3,7 @@ import MobilePagination from "./mobilePaginationComponent";
 import PreviewComponent from "./prevComponent";
 import NextComponent from "./nextComponent";
 import DeckstopPagination from "./deckstopPagination";
+import BarComponent from "../barComponent";
 
 export default function Pagination({
   page,
@@ -17,7 +18,8 @@ export default function Pagination({
   let pagination = getPagination(page, totalPages, false);
 
   return (
-    <div className="mx-[7.8%] lg:w-8/12 lg:mx-auto md:mx-[5.2%] mt-14 md:mt-23 lg:mt-18">
+    <div className="flex flex-col justify-between mx-[7.8%] h-15.25 md:h-18.75 lg:w-8/12 lg:mx-auto md:mx-[5.2%] mt-14 md:mt-23 lg:mt-18">
+      <BarComponent position="top"/>
       <div className="flex flex-row justify-between items-center">
         <PreviewComponent page={page} setPage={setPage} />
         <div>

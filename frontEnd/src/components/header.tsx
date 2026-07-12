@@ -1,5 +1,6 @@
 import SearchBar from "./searchBar";
 import IconsSet from "./iconsSet";
+import BarComponent from "./barComponent";
 
 export default function Header() {
   return (
@@ -7,7 +8,7 @@ export default function Header() {
       <h2 className="font-head font-normal text-[40px] leading-16 tracking-normal whitespace-nowrap md:mr-[62.5%] lg:mr-0 mr-[13.6%]">BookStore</h2>
       <SearchBar />
       <IconsSet />
-      <div className="absolute border-t border-grey w-full bottom-0 left-0"></div>
+      <BarComponent position="bottom"/>
     </header>
   );
 }
