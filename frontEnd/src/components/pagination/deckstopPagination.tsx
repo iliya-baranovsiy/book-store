@@ -1,9 +1,17 @@
-import type { TPagination } from "../../types/pagination.types"
+import type { TPagination } from "../../types/pagination.types";
 
-export default function MobilePagination({pagination_mobile, page, setPage}:{pagination_mobile: TPagination, page: number, setPage: (page: number) => void}){
+export default function DeckstopPagination({
+  pagination_deckstop,
+  page,
+  setPage,
+}: {
+  pagination_deckstop: TPagination;
+  page: number;
+  setPage: (page: number) => void;
+}) {
     return (
-        <div className="flex gap-8 md:hidden">
-            {pagination_mobile.pagination.map((item, index) =>
+        <div className=" hidden md:flex gap-8 cursor-pointer">
+            {pagination_deckstop.pagination.map((item, index) =>
             item === "..." ? (
               <span key={`dots-${index}`} className="text-greytext text-4">...</span>
             ) : (

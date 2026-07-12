@@ -1,7 +1,8 @@
 import getPagination from "./paginationFunc";
-import PreventIcon from "./../../assets/icons/left.png";
-import NextIcon from "./../../assets/icons/right.png";
 import MobilePagination from "./mobilePaginationComponent";
+import PreviewComponent from "./prevComponent";
+import NextComponent from "./nextComponent";
+import DeckstopPagination from "./deckstopPagination";
 
 export default function Pagination({
   page,
@@ -18,11 +19,20 @@ export default function Pagination({
   return (
     <div className="mx-[7.8%] lg:w-8/12 lg:mx-auto md:mx-[5.2%] mt-14 md:mt-23 lg:mt-18">
       <div className="flex flex-row justify-between items-center">
-        <img src={PreventIcon} alt="prevent" onClick={() => page>1 ?setPage(page-1): null}></img>
-        <div className="md:hidden">
-          <MobilePagination page={page} setPage={setPage} pagination_mobile={pagination_mobile}/>
+        <PreviewComponent page={page} setPage={setPage} />
+        <div>
+          <MobilePagination
+            page={page}
+            setPage={setPage}
+            pagination_mobile={pagination_mobile}
+          />
+          <DeckstopPagination
+            page={page}
+            setPage={setPage}
+            pagination_deckstop={pagination}
+          />
         </div>
-        <img src={NextIcon} alt="next" onClick={() => page<totalPages ?setPage(page+1): null}></img>
+        <NextComponent page={page} totalPages={totalPages} setPage={setPage} />
       </div>
     </div>
   );
