@@ -18,7 +18,7 @@ export default function DeckstopPagination({
               <button
                 key={`${item}-${index}`}
                 onClick={() => setPage(item as number)}
-                className={item === page ? "font-bold text-black" : "text-greytext text-4 leading-6"}
+                className={item === page ? "font-bold text-black" : "text-greytext text-4 leading-6 cursor-pointer"}
               >
                 {item}
               </button>
