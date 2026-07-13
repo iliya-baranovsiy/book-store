@@ -28,7 +28,7 @@ export default function HomePage() {
       <ContainerTtitle />
       <BooksContainer data={response!} />
       <Pagination page={page} totalPages={response!.pages} setPage={(page) => setSearchParams({page: String(page)})}/>
-      <SubscribeFormComponent></SubscribeFormComponent>
+      <SubscribeFormComponent />
     </>
   );
 }
