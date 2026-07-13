@@ -19,7 +19,7 @@ export default function BookInfoComponent({
   publisher: string
 }) {
   return (
-    <div className="flex flex-col lg:flex-row w-full lg:w-8/12 items-center lg:mx-auto justify-between gap-9 md:gap-12 lg:gap-0">
+    <div className="flex flex-col lg:flex-row w-full lg:w-8/12 lg:mx-auto justify-between lg:gap-0 items-center lg:items-stretch">
       <BookPictureComponent imgUrl={imgUrl} />
       <BookDetailsComponent
         cost={cost}
@@ -29,6 +29,7 @@ export default function BookInfoComponent({
         language={language}
         publisher={publisher}
       />
+      
     </div>
   );
 }

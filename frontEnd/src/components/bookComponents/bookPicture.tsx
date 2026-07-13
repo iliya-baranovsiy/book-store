@@ -6,7 +6,7 @@ export default function BookPictureComponent({ imgUrl }: { imgUrl: string }) {
   const [color] = useState(getRandomColor());
 
   return (
-    <div className={`${color} justify-items-center w-[85%] md:w-[89.6%] lg:w-[48.5%] relative`}>
+    <div className={`${color} w-[85%] md:w-[89.6%] lg:w-[48.5%] relative flex items-center justify-center`}>
       <img src={ToSaveIcon} className="top-0 right-0 absolute" alt="save"></img>
       <img
         src={`${import.meta.env.VITE_API_URL}/${imgUrl}`}
