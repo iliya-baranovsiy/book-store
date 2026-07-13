@@ -2,10 +2,14 @@ import { createBrowserRouter } from "react-router-dom";
 
 import HomePage from "../pages/HomePage";
 import MainLayout from "../layouts/MainLayout";
+import BookPage from "../pages/BookPage";
 
 export const router = createBrowserRouter([
   {
     element: <MainLayout />,
-    children: [{ path: "/", element: <HomePage /> }],
+    children: [
+      { path: "/", element: <HomePage /> },
+      { path: "/books/:id", element: <BookPage /> },
+    ],
   },
 ]);

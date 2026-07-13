@@ -16,3 +16,9 @@ export type TBookResponse = {
   total: number;
   pages: number;
 };
+
+
+export type TBookOneResponse = {
+  book: TBook;
+  similar: TBook[];
+}

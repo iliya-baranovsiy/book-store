@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const colors = ["bg-blue", "bg-green", "bg-purple", "bg-orange"];
-function getRandomColor() {
+export function getRandomColor() {
   return colors[Math.floor(Math.random() * colors.length)];
 }
 

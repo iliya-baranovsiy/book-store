@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Rating from "./ratingComponent";
 import BookPicture from "./bookPictureComponent";
-
 
 export default function BookComponent({
   id,
@@ -18,12 +18,14 @@ export default function BookComponent({
   author: string;
   publisher: string;
   cost: number;
-  rating: number
+  rating: number;
 }) {
+  const location = useLocation();
+  console.log(location.pathname)
   return (
-    <Link to={`books/${id}`}>
+    <Link to={`/books/${id}`} state={{ from: location.pathname + location.search}}>
       <div className="grid grid-cols-1 gap-5">
-        <BookPicture imgUrl={imgUrl}/>
+        <BookPicture imgUrl={imgUrl} />
         <div>
           <h3 className="font-head font-normal text-[24px] tracking-normal mb-[4.76%]">
             {title}
@@ -31,7 +33,7 @@ export default function BookComponent({
           <span className="text-greytext text-[16px] leading-6 mb-[23.8%] block">
             by {author}, {publisher}
           </span>
-            <Rating rating={rating} cost={cost}/>
+          <Rating rating={rating} cost={cost} textSize={24}/>
         </div>
       </div>
     </Link>

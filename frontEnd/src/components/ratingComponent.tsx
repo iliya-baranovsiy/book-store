@@ -4,13 +4,15 @@ import BlackStar from "./../assets/icons/starblack.png";
 export default function Rating({
   rating,
   cost,
+  textSize,
 }: {
   rating: number;
   cost: number;
+  textSize:number;
 }) {
   return (
     <div className="flex flex-row justify-between items-center">
-      <h3 className="font-head font-normal text-[24px] tracking-normal">
+      <h3 className={`font-head font-normal text-[${textSize}px] tracking-normal`}>
         ${cost}
       </h3>
       <div className="flex flex-row gap-2">
