@@ -23,3 +23,8 @@ class BooksResponseSchema(BaseModel):
     items: list[BookSchema] | None
     total: int
     pages: int
+
+
+class BookResponseSchema(BaseModel):
+    book: BookSchema | None
+    similar: list[BookSchema] | None

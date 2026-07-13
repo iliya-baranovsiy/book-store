@@ -21,3 +21,21 @@ class BookOrm:
         stmt = select(func.count()).select_from(Book)
         result = await session.execute(stmt)
         return result.scalars().first()
+
+    @staticmethod
+    async def get_book(session: AsyncSession, book_id: int):
+        stmt = select(Book).where(Book.id == book_id)
+        result = await session.execute(stmt)
+        if result:
+            return BookSchema.model_validate(result.scalars().first())
+        else:
+            return None
+
+    @staticmethod
+    async def get_similar_books(session: AsyncSession):
+        stmt = select(Book).limit(9)
+        result = await session.execute(stmt)
+        if result:
+            return [BookSchema.model_validate(book) for book in result.scalars().all()]
+        else:
+            return None

@@ -2,7 +2,7 @@ import math
 from sqlalchemy.ext.asyncio import AsyncSession
 from database.engines import async_session
 from database.books.orm import BookOrm
-from database.books.schemas import BooksResponseSchema
+from database.books.schemas import BooksResponseSchema, BookResponseSchema
 
 
 class BookRepository:
@@ -17,3 +17,9 @@ class BookRepository:
             books = await self.book_orm.get_books(session=session, offset=offset, limit=limit)
             books_count = await self.book_orm.get_all_books_count(session=session)
             return BooksResponseSchema(items=books, total=books_count, pages=math.ceil(books_count / limit))
+
+    async def get_book(self, book_id):
+        async with self.session as session:
+            book = await self.book_orm.get_book(session=session, book_id=book_id)
+            similar = await self.book_orm.get_similar_books(session=session)
+            return BookResponseSchema(book=book, similar=similar)
