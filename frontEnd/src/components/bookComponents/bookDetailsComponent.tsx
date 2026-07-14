@@ -2,7 +2,7 @@ import BarComponent from "../barComponent";
 import Rating from "../ratingComponent";
 import TextComponent from "./bookTextComponent";
 import MoreDetailsComponent from "./moreDetailsComponent";
-import AddToCartButton from "./addToCartButtonComponent";
+import Button from "./buttonComponent";
 import PreviewButtonComponent from "./previewButtonComponent";
 
 
@@ -33,7 +33,7 @@ export default function BookDetailsComponent({
           <TextComponent atr="Format" data={format} />
           <MoreDetailsComponent />
         </div>
-        <AddToCartButton />
+        <Button text="ADD TO CART"/>
         <PreviewButtonComponent />
       </div>
     </div>

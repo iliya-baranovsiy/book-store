@@ -36,11 +36,11 @@ export default function IconsSet({
         <img
           src={isOpen ? CloseIcon : MenuIcon}
           alt="menu"
-          className={`${isOpen ? "object-contain" : "block max-w-none lg:hidden md:max-w-full"}`}
+          className={`${isOpen ? "object-contain lg:hidden" : "block max-w-none lg:hidden md:max-w-full"}`}
           onClick={() => setOpen(!isOpen)}
         />
       </div>
-      {isOpen && (<BurgerMenu closeMenu={() => {setOpen(false)}}/>)}
+      {isOpen && (<BurgerMenu />)}
     </>
   );
 }
