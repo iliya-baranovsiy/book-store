@@ -21,7 +21,6 @@ export default function BookComponent({
   rating: number;
 }) {
   const location = useLocation();
-  console.log(location.pathname)
   return (
     <Link to={`/books/${id}`} state={{ from: location.pathname + location.search}}>
       <div className="grid grid-cols-1 gap-5">

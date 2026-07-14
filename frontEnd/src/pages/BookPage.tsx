@@ -1,13 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useBook } from "../hooks/useBooks";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BookTitleComponent from "../components/bookComponents/bookTitleComponent";
 import BookInfoComponent from "../components/bookComponents/bookInfoComponent";
 import TabSection from "../components/bookComponents/tabSectionComponent";
 import TabContent from "../components/bookComponents/tabContentComponent";
 import SocialMediaIcons from "../components/bookComponents/socialMediaIcons";
 import SubscribeFormComponent from "../components/subscribeForm";
+import SlideMenu from "../components/bookComponents/slideMenu";
 import type { TTab } from "../types/tab.types.type";
 
 
@@ -17,7 +18,14 @@ export default function BookPage() {
   const location = useLocation();
   const [tab, setTab] = useState<TTab>("Description");
 
-  const previousPage = location.state?.from;
+  const previousPage = location.state?.from ?? "/";
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [id]);
 
   if (isLoading) {
     return <div>Загрузка...</div>;
@@ -42,6 +50,7 @@ export default function BookPage() {
       <TabContent tab={tab} authors={response!.book.author} description={response!.book.description}/>
       <SocialMediaIcons />
       <SubscribeFormComponent />
+      <SlideMenu similarBooks={response!.similar}/>
     </>
   );
 }
