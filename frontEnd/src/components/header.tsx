@@ -17,7 +17,12 @@ export default function Header() {
 
   useEffect(() => {
     const handleResize = () => {
-      setHidden(window.innerWidth <= 1024);
+      if (window.innerWidth >= 1024) {
+        setOpen(false);
+        setHidden(false)
+      } else if (window.innerWidth <= 1024) {
+        setHidden(true);
+      }
     };
 
     window.addEventListener("resize", handleResize);

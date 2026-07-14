@@ -40,7 +40,7 @@ export default function IconsSet({
           onClick={() => setOpen(!isOpen)}
         />
       </div>
-      {isOpen && (<BurgerMenu />)}
+      {isOpen && (<BurgerMenu setOpen={setOpen}/>)}
     </>
   );
 }

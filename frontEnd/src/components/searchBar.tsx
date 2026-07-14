@@ -3,7 +3,8 @@ import SearchIcon from "./../assets/icons/Search.png";
 export default function SearchBar({hidden}:{hidden:boolean}) {
 
   return (
-    <div className={`${hidden? "hidden": ""} lg:ml-[13.48%] lg:mr-[9.38%] lg:w-[48.39%] h-14 border-2 border-grey flex flex-row items-center pl-5 w-full mb-78`}>
+    <div className={`${hidden? "hidden": ""} lg:ml-[13.48%] lg:mr-[9.38%] lg:w-[48.39%] h-14 border-2 border-grey 
+    flex flex-row items-center pl-5 w-full mb-78 lg:mb-0`}>
       <form className="w-[88.9%] h-full border-0">
         <input
           type="search"

@@ -1,11 +1,28 @@
-import SearchBar from "./searchBar"
-import Button from "./bookComponents/buttonComponent"
+import SearchBar from "./searchBar";
+import Button from "./bookComponents/buttonComponent";
+import BarComponent from "./barComponent";
+import CloseIcon from "../assets/icons/close.png";
 
-export default function BurgerMenu(){
-    return(
-        <div className="fixed left-0 flex flex-col min-h-screen top-26 w-full rounded-lg bg-white lg:hidden pt-14 px-[7.8%] z-50">
-            <SearchBar hidden={false}/>
-            <Button text="SIGN IN"/>
-        </div>
-    )
+export default function BurgerMenu({
+  setOpen,
+}: {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  return (
+    <>
+      <div
+        className="fixed md:inset-0 bg-black/50 z-40 lg:hidden"
+        onClick={() => setOpen(false)}
+      ></div>
+      <div className="fixed hidden top-0 right-0 bg-white md:w-[48%] h-26 z-50 md:flex items-center justify-between pr-[6.5%]">
+        <div></div>
+        <img src={CloseIcon} alt="close" onClick={() => (setOpen(false))}></img>
+        <BarComponent position="bottom" />
+      </div>
+      <div className="fixed left-0 flex flex-col min-h-screen top-26 w-full bg-white lg:hidden pt-14 px-[7.5%] md:px-[6.5%] z-50 md:w-[48%] md:left-auto md:right-0">
+        <SearchBar hidden={false} />
+        <Button text="SIGN IN" />
+      </div>
+    </>
+  );
 }
