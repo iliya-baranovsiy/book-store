@@ -5,6 +5,7 @@ import { useState } from "react";
 import BookTitleComponent from "../components/bookComponents/bookTitleComponent";
 import BookInfoComponent from "../components/bookComponents/bookInfoComponent";
 import TabSection from "../components/bookComponents/tabSectionComponent";
+import TabContent from "../components/bookComponents/tabContentComponent";
 import type { TTab } from "../types/tab.types.type";
 
 
@@ -36,6 +37,7 @@ export default function BookPage() {
         publisher={response!.book.publisher}
       />
       <TabSection tab={tab} setTab={setTab}/>
+      <TabContent tab={tab} authors={response!.book.author} description={response!.book.description}/>
     </>
   );
 }
