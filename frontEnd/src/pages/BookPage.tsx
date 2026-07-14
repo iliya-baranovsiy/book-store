@@ -1,13 +1,18 @@
 import { useParams } from "react-router-dom";
 import { useBook } from "../hooks/useBooks";
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
 import BookTitleComponent from "../components/bookComponents/bookTitleComponent";
 import BookInfoComponent from "../components/bookComponents/bookInfoComponent";
+import TabSection from "../components/bookComponents/tabSectionComponent";
+import type { TTab } from "../types/tab.types.type";
+
 
 export default function BookPage() {
   const { id } = useParams();
   const { data: response, isLoading } = useBook(Number(id));
   const location = useLocation();
+  const [tab, setTab] = useState<TTab>("Description");
 
   const previousPage = location.state?.from;
 
@@ -21,7 +26,16 @@ export default function BookPage() {
         title={response!.book.title}
         prevent_page={previousPage}
       />
-      <BookInfoComponent imgUrl={response!.book.picture_url} rating={response!.book.rating} cost={response!.book.cost} authors={response!.book.author} format={response!.book.format} language={response!.book.language} publisher={response!.book.publisher}/>
+      <BookInfoComponent
+        imgUrl={response!.book.picture_url}
+        rating={response!.book.rating}
+        cost={response!.book.cost}
+        authors={response!.book.author}
+        format={response!.book.format}
+        language={response!.book.language}
+        publisher={response!.book.publisher}
+      />
+      <TabSection tab={tab} setTab={setTab}/>
     </>
   );
 }
