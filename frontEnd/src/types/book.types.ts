@@ -13,27 +13,30 @@ export type TBook = {
 
 export type TBookDetail = TBook & {
   tags: TTag[];
-  reviews: Treview[];
-}
+  reviews: TReview[];
+};
 
 export type TAuthor = {
   id: number;
   name: string;
   biography: string;
-}
+};
 
 export type TTag = {
   id: number;
   tag: string;
-}
+};
 
-export type Treview = {
+export type TReview = {
   id: number;
   bookId: number;
   reviewerId: number;
   review: string;
   rating: string;
-}
+};
 
-
-
+export type TShortBookData = {
+  id: number;
+  title: string;
+  pictureUrl: string;
+};
