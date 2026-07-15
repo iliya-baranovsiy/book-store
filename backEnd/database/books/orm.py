@@ -1,8 +1,8 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
 from sqlalchemy.orm import selectinload
-from database.books.models import Book
-from .dto.schemas import BookBaseSchema
+from database.books.models import Book, BookTag, Tag
+from .dto.schemas import BookBaseSchema, BookDetailSchema
 
 
 class BookOrm:
@@ -23,20 +23,40 @@ class BookOrm:
         result = await session.execute(stmt)
         return result.scalars().first()
 
-    """@staticmethod
+    @staticmethod
     async def get_book(session: AsyncSession, book_id: int):
-        stmt = select(Book).where(Book.id == book_id)
+        stmt = select(Book).options(
+            selectinload(Book.authors),
+            selectinload(Book.reviews),
+            selectinload(Book.tags)
+        ).where(Book.id == book_id)
         result = await session.execute(stmt)
         if result:
-            return BookSchema.model_validate(result.scalars().first())
+            return BookDetailSchema.model_validate(result.scalars().first())
         else:
             return None
 
     @staticmethod
-    async def get_similar_books(session: AsyncSession):
-        stmt = select(Book).limit(9)
+    async def get_similar_books(session: AsyncSession, book_id: int):
+        subquery = select(BookTag.tag_id).where(BookTag.book_id == book_id)
+        stmt = select(Book, func.count(BookTag.tag_id).label("score")).join(BookTag).where(
+            BookTag.tag_id.in_(subquery)).where(
+            Book.id != book_id
+        ).group_by(Book.id).order_by(func.count(BookTag.tag_id).desc(), Book.rating.desc()).limit(9).options(
+            selectinload(Book.authors)
+        )
         result = await session.execute(stmt)
-        if result:
-            return [BookSchema.model_validate(book) for book in result.scalars().all()]
-        else:
-            return None"""
+        books = result.scalars().all()
+        if not books:
+            stmt = (
+                select(Book)
+                .where(Book.id != book_id)
+                .order_by(Book.rating.desc())
+                .limit(9)
+                .options(
+                    selectinload(Book.authors),
+                )
+            )
+            result = await session.execute(stmt)
+            books = result.scalars().all()
+        return [BookBaseSchema.model_validate(book) for book in books]

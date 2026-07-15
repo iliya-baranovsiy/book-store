@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Query
-from busines_logic.responses_schemas.book_responses import BooksResponse
+from busines_logic.responses_schemas.book_responses import BooksResponse, BookDetailResponse
 from busines_logic.services.book_service import BookService
 
 router = APIRouter(prefix='/books')
@@ -12,8 +12,8 @@ async def get_all_books(page: int = Query(default=1, ge=1)):
     return books
 
 
-"""@router.get("/{bookId}", response_model=BookResponseSchema)
+@router.get("/{bookId}", response_model=BookDetailResponse)
 async def get_book(book_id: int):
     books_service = BookService()
     book = await books_service.get_book(book_id=book_id)
-    return book"""
+    return book
