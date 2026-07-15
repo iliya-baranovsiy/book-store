@@ -1,0 +1,1 @@
+from .entities_schemas import AuthorSchema, ReviewSchema, TagSchema

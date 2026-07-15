@@ -14,7 +14,7 @@ from database.engines import Base
 from config import settings
 
 from database.books.models import Book
-from database.users.models import Users
+from database.users.models import User
 
 config = context.config
 

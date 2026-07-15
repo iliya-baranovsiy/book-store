@@ -1,18 +1,19 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
+from sqlalchemy.orm import selectinload
 from database.books.models import Book
-from .schemas import BookSchema
+from .schemas.schemas import BookListSchema, BookSchema
 
 
 class BookOrm:
 
     @staticmethod
     async def get_books(session: AsyncSession, offset: int, limit: int):
-        stmt = select(Book).limit(limit).offset(offset)
+        stmt = select(Book).options(selectinload(Book.authors)).limit(limit).offset(offset)
         result_row = await session.execute(stmt)
         if result_row:
             result = result_row.scalars().all()
-            return [BookSchema.model_validate(book) for book in result]
+            return [BookListSchema.model_validate(book) for book in result]
         else:
             return None
 

@@ -1,7 +1,6 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import String, Text, Numeric, CheckConstraint, ForeignKey, Enum
+from sqlalchemy import String, Text, Numeric, CheckConstraint, ForeignKey
 from ..engines import Base
-from .book_tags import Tags
 
 
 class BookAuthor(Base):
@@ -9,6 +8,12 @@ class BookAuthor(Base):
 
     book_id: Mapped[int] = mapped_column(ForeignKey("books.id", ondelete="CASCADE"), primary_key=True)
     author_id: Mapped[int] = mapped_column(ForeignKey("authors.id", ondelete="CASCADE"), primary_key=True)
+
+
+class BookTag(Base):
+    __tablename__ = "book_tag"
+    tag_id: Mapped[int] = mapped_column(ForeignKey("tags.id", ondelete="CASCADE"), primary_key=True)
+    book_id: Mapped[int] = mapped_column(ForeignKey("books.id", ondelete="CASCADE"), primary_key=True)
 
 
 class Book(Base):
@@ -23,9 +28,9 @@ class Book(Base):
     rating: Mapped[int]
     cost: Mapped[float] = mapped_column(Numeric(10, 2))
     picture_url: Mapped[str] = mapped_column(Text)
-    tags: Mapped[Tags] = mapped_column(Enum(Tags))
 
-    reviews: Mapped[list["Review"]] = relationship("Reviews", back_populates="book", cascade="all, delete-orphan")
+    tags: Mapped[list["Tag"]] = relationship(secondary=BookTag.__table__, back_populates="books")
+    reviews: Mapped[list["Review"]] = relationship("Review", back_populates="book", cascade="all, delete-orphan")
     authors: Mapped[list["Author"]] = relationship(secondary=BookAuthor.__table__, back_populates="books")
 
     __table_args__ = (CheckConstraint("rating >= 0 AND rating <= 5",
@@ -46,13 +51,22 @@ class Review(Base):
     __tablename__ = "reviews"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    book_id: Mapped[int] = mapped_column(ForeignKey("books.id"))
+    book_id: Mapped[int] = mapped_column(ForeignKey("books.id", ondelete="CASCADE"))
     reviewer_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
     review: Mapped[str] = mapped_column(String(512))
     rating: Mapped[int]
 
     book: Mapped["Book"] = relationship("Book", back_populates="reviews")
-    reviewer: Mapped["Users"] = relationship("Users", back_populates="reviews")
+    reviewer: Mapped["User"] = relationship("User", back_populates="reviews")
 
     __table_args__ = (CheckConstraint("rating >= 0 AND rating <= 5",
                                       name="rating_range_review"),)
+
+
+class Tag(Base):
+    __tablename__ = "tags"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    tag: Mapped[str] = mapped_column(String(50))
+
+    books: Mapped[list["Book"]] = relationship(secondary=BookTag.__table__, back_populates="tags")
