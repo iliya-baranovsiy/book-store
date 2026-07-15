@@ -2,7 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
 from sqlalchemy.orm import selectinload
 from database.books.models import Book
-from .schemas.schemas import BookListSchema, BookSchema
+from .dto.schemas import BookBaseSchema
 
 
 class BookOrm:
@@ -13,7 +13,7 @@ class BookOrm:
         result_row = await session.execute(stmt)
         if result_row:
             result = result_row.scalars().all()
-            return [BookListSchema.model_validate(book) for book in result]
+            return [BookBaseSchema.model_validate(book) for book in result]
         else:
             return None
 
@@ -23,7 +23,7 @@ class BookOrm:
         result = await session.execute(stmt)
         return result.scalars().first()
 
-    @staticmethod
+    """@staticmethod
     async def get_book(session: AsyncSession, book_id: int):
         stmt = select(Book).where(Book.id == book_id)
         result = await session.execute(stmt)
@@ -39,4 +39,4 @@ class BookOrm:
         if result:
             return [BookSchema.model_validate(book) for book in result.scalars().all()]
         else:
-            return None
+            return None"""

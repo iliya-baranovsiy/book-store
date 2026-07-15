@@ -9,6 +9,6 @@ class BookService:
         books = await self.book_repo.get_all_books(page=page)
         return books
 
-    async def get_book(self, book_id):
+    """async def get_book(self, book_id):
         book = await self.book_repo.get_book(book_id=book_id)
-        return book
+        return book"""
