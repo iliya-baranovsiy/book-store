@@ -41,13 +41,13 @@ export default function BookPage() {
         imgUrl={response!.book.picture_url}
         rating={response!.book.rating}
         cost={response!.book.cost}
-        authors={response!.book.author}
+        authors={response!.book.authors.map((author) => author.name).join(", ")}
         format={response!.book.format}
         language={response!.book.language}
         publisher={response!.book.publisher}
       />
       <TabSection tab={tab} setTab={setTab}/>
-      <TabContent tab={tab} authors={response!.book.author} description={response!.book.description}/>
+      <TabContent tab={tab} authors={response!.book.authors.map((author) => author.name).join(", ")} description={response!.book.description}/>
       <SocialMediaIcons />
       <SubscribeFormComponent />
       <SlideMenu similarBooks={response!.similar}/>

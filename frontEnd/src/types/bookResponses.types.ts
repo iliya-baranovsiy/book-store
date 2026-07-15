@@ -1,11 +1,12 @@
 import type { TBook } from "./book.types";
+import type { TBookDetail } from "./book.types";
 
 export type TBookResponse = {
   items: TBook[];
   pages: number;
 };
 
-export type TBookOneResponse = {
-  book: TBook;
+export type TBookDetailResponse = {
+  book: TBookDetail;
   similar: TBook[];
 };

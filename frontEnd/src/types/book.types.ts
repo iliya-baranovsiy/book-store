@@ -11,10 +11,28 @@ export type TBook = {
   picture_url: string;
 };
 
+export type TBookDetail = TBook & {
+  tags: TTag[];
+  reviews: Treview[];
+}
+
 export type TAuthor = {
   id: number;
   name: string;
   biography: string;
+}
+
+export type TTag = {
+  id: number;
+  tag: string;
+}
+
+export type Treview = {
+  id: number;
+  bookId: number;
+  reviewerId: number;
+  review: string;
+  rating: string;
 }
 
 

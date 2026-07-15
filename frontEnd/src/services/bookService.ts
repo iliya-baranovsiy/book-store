@@ -1,6 +1,6 @@
 import { api } from "../api/axios";
 import type { TBookResponse } from "../types/bookResponses.types";
-import type {TBookOneResponse} from "../types/book.types"
+import type { TBookDetailResponse } from "../types/bookResponses.types";
 
 export async function getAllBooks(page: number): Promise<TBookResponse>{
     const response = await api.get<TBookResponse>("/books",{
@@ -11,7 +11,7 @@ export async function getAllBooks(page: number): Promise<TBookResponse>{
     return response.data
 }
 
-export async function getBook(book_id:number): Promise<TBookOneResponse>{
+export async function getBook(book_id:number): Promise<TBookDetailResponse>{
     const response = await api.get("/books/{book_id}",{
         params:{
             book_id
