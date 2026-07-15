@@ -1,5 +1,5 @@
 import { api } from "../api/axios";
-import type { TBookResponse } from "../types/book.types";
+import type { TBookResponse } from "../types/bookResponses.types";
 import type {TBookOneResponse} from "../types/book.types"
 
 export async function getAllBooks(page: number): Promise<TBookResponse>{

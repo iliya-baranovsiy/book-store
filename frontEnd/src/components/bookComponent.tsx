@@ -29,7 +29,7 @@ export default function BookComponent({
           <h3 className="font-head font-normal text-[24px] tracking-normal mb-[4.76%]">
             {title}
           </h3>
-          <span className="text-greytext text-[16px] leading-6 mb-[23.8%] block">
+          <span className="text-greytext text-[16px] leading-6 mb-[23.8%] block h-6">
             by {author}, {publisher}
           </span>
           <Rating rating={rating} cost={cost} textSize={24}/>

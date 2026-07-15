@@ -2,7 +2,7 @@ export type TBook = {
   id: number;
   title: string;
   description: string;
-  author: string;
+  authors: TAuthor[];
   publisher: string;
   language: string;
   format: string;
@@ -11,14 +11,11 @@ export type TBook = {
   picture_url: string;
 };
 
-export type TBookResponse = {
-  items: TBook[];
-  total: number;
-  pages: number;
-};
-
-
-export type TBookOneResponse = {
-  book: TBook;
-  similar: TBook[];
+export type TAuthor = {
+  id: number;
+  name: string;
+  biography: string;
 }
+
+
+
