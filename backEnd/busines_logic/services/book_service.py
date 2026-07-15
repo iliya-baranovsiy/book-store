@@ -12,3 +12,7 @@ class BookService:
     async def get_book(self, book_id):
         book = await self.book_repo.get_book(book_id=book_id)
         return book
+
+    async def get_books_from_search(self, search_text: str):
+        books = await self.book_repo.get_books_from_search(search_text=search_text)
+        return books

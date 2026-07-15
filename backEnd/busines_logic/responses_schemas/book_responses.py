@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from database.books.dto.schemas import BookDetailSchema, BookBaseSchema
+from database.books.dto.schemas import BookDetailSchema, BookBaseSchema, BookShortSchema
 
 
 class BooksResponse(BaseModel):
@@ -10,3 +10,7 @@ class BooksResponse(BaseModel):
 class BookDetailResponse(BaseModel):
     book: BookDetailSchema | None
     similar: list[BookBaseSchema] | None
+
+
+class BookShortResponse(BaseModel):
+    items: list[BookShortSchema] | None

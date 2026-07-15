@@ -1,8 +1,8 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
 from sqlalchemy.orm import selectinload
-from database.books.models import Book, BookTag, Tag
-from .dto.schemas import BookBaseSchema, BookDetailSchema
+from database.books.models import Book, BookTag
+from .dto.schemas import BookBaseSchema, BookDetailSchema, BookShortSchema
 
 
 class BookOrm:
@@ -60,3 +60,11 @@ class BookOrm:
             result = await session.execute(stmt)
             books = result.scalars().all()
         return [BookBaseSchema.model_validate(book) for book in books]
+
+    @staticmethod
+    async def get_books_from_search(session: AsyncSession, search_text: str):
+        stmt = select(Book.id, Book.title, Book.picture_url).where(Book.title.ilike(f"%{search_text}%")).limit(3)
+        result = await session.execute(stmt)
+        if result:
+            return [BookShortSchema.model_validate(book) for book in result.all()]
+        return None
