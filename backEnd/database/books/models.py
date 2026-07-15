@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import String, Text, Numeric, CheckConstraint, ForeignKey
+from sqlalchemy import String, Text, Numeric, CheckConstraint, ForeignKey, Enum
 from ..engines import Base
+from .book_tags import Tags
 
 
 class BookAuthor(Base):
@@ -22,6 +23,7 @@ class Book(Base):
     rating: Mapped[int]
     cost: Mapped[float] = mapped_column(Numeric(10, 2))
     picture_url: Mapped[str] = mapped_column(Text)
+    tags: Mapped[Tags] = mapped_column(Enum(Tags))
 
     reviews: Mapped[list["Review"]] = relationship("Reviews", back_populates="book", cascade="all, delete-orphan")
     authors: Mapped[list["Author"]] = relationship(secondary=BookAuthor.__table__, back_populates="books")
