@@ -13,6 +13,7 @@ export default function BookDetailsComponent({
   publisher,
   language,
   format,
+  tags,
 }: {
   cost: number;
   rating: number;
@@ -20,6 +21,7 @@ export default function BookDetailsComponent({
   publisher: string;
   language: string;
   format: string;
+  tags: string
 }) {
   return (
     <div className="w-[85%] md:w-[89.6%] lg:w-[48.5%]">
@@ -31,7 +33,7 @@ export default function BookDetailsComponent({
           <TextComponent atr="Publisher" data={publisher} />
           <TextComponent atr="Language" data={language} />
           <TextComponent atr="Format" data={format} />
-          <MoreDetailsComponent />
+          <MoreDetailsComponent tags={tags}/>
         </div>
         <Button text="ADD TO CART"/>
         <PreviewButtonComponent />

@@ -45,9 +45,10 @@ export default function BookPage() {
         format={response!.book.format}
         language={response!.book.language}
         publisher={response!.book.publisher}
+        tags={response!.book.tags.map((tag) => (tag.tag)).join(" ")}
       />
       <TabSection tab={tab} setTab={setTab}/>
-      <TabContent tab={tab} authors={response!.book.authors.map((author) => author.name).join(", ")} description={response!.book.description}/>
+      <TabContent tab={tab} authors={response!.book.authors} description={response!.book.description} reviews={response!.book.reviews}/>
       <SocialMediaIcons />
       <SubscribeFormComponent />
       <SlideMenu similarBooks={response!.similar}/>

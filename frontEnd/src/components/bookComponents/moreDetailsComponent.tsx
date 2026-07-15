@@ -1,7 +1,8 @@
 import { useState } from "react";
 import OpenIcon from "../../assets/icons/open.png";
+import TextComponent from "./bookTextComponent";
 
-export default function MoreDetailsComponent() {
+export default function MoreDetailsComponent({tags}:{tags: string}) {
   const [isOpen, setOpen] = useState(false);
   return (
     <>
@@ -18,10 +19,7 @@ export default function MoreDetailsComponent() {
         }`}
       >
         <div className="text-gray-600">
-          <p>DETAILS</p>
-          <p>DETAILS</p>
-          <p>DETAILS</p>
-          <p>DETAILS</p>
+          <TextComponent atr="Tags" data={tags}/>
         </div>
       </div>
     </>
