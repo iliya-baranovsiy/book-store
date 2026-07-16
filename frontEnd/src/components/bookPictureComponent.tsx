@@ -9,7 +9,7 @@ export default function BookPicture({imgUrl}:{imgUrl: string;}) {
     const [color] = useState(getRandomColor)
 
     return (
-        <div className={`${color} justify-items-center`}>
+        <div className={`${color} justify-items-center flex shrink-0`}>
           <img
             src={`${import.meta.env.VITE_API_URL}/${imgUrl}`}
             alt="book picture"
