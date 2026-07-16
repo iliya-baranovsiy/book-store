@@ -8,8 +8,12 @@ from .dto.schemas import BookBaseSchema, BookDetailSchema, BookShortSchema
 class BookOrm:
 
     @staticmethod
-    async def get_books(session: AsyncSession, offset: int, limit: int):
-        stmt = select(Book).options(selectinload(Book.authors)).limit(limit).offset(offset)
+    async def get_books(session: AsyncSession, offset: int, limit: int, search_text: str = None):
+        if search_text:
+            stmt = select(Book).options(selectinload(Book.authors)).where(Book.title.ilike(f"%{search_text}%")).limit(
+                limit).offset(offset)
+        else:
+            stmt = select(Book).options(selectinload(Book.authors)).limit(limit).offset(offset)
         result_row = await session.execute(stmt)
         if result_row:
             result = result_row.scalars().all()
@@ -18,8 +22,11 @@ class BookOrm:
             return None
 
     @staticmethod
-    async def get_all_books_count(session: AsyncSession):
-        stmt = select(func.count()).select_from(Book)
+    async def get_all_books_count(session: AsyncSession, search_text: str = None):
+        if search_text:
+            stmt = select(func.count()).select_from(Book).where(Book.title.ilike(f"%{search_text}%"))
+        else:
+            stmt = select(func.count()).select_from(Book)
         result = await session.execute(stmt)
         return result.scalars().first()
 

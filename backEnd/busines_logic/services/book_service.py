@@ -5,8 +5,8 @@ class BookService:
     def __init__(self):
         self.book_repo = BookRepository()
 
-    async def get_all_books(self, page: int):
-        books = await self.book_repo.get_all_books(page=page)
+    async def get_all_books(self, page: int, search_text: str = None):
+        books = await self.book_repo.get_all_books(page=page, search_text=search_text)
         return books
 
     async def get_book(self, book_id):

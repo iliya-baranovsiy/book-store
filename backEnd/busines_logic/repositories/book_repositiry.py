@@ -10,12 +10,12 @@ class BookRepository:
         self.book_orm = BookOrm()
         self.session = session if session else async_session()
 
-    async def get_all_books(self, page: int):
+    async def get_all_books(self, page: int, search_text: str = None):
         limit = 12
         offset = (page - 1) * limit
         async with self.session as session:
-            books = await self.book_orm.get_books(session=session, offset=offset, limit=limit)
-            books_count = await self.book_orm.get_all_books_count(session=session)
+            books = await self.book_orm.get_books(session=session, offset=offset, limit=limit, search_text=search_text)
+            books_count = await self.book_orm.get_all_books_count(session=session, search_text=search_text)
             return BooksResponse(items=books, pages=math.ceil(books_count / limit))
 
     async def get_book(self, book_id):
