@@ -5,6 +5,7 @@ import ContainerTtitle from "../components/containerTtitle";
 import BooksContainer from "../components/booksContainer";
 import Pagination from "../components/pagination/paginationComponent";
 import SubscribeFormComponent from "../components/subscribeForm";
+import SearchBar from "../components/searchBar";
 
 export default function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -26,6 +27,7 @@ export default function HomePage() {
   }
   return (
     <>
+      <SearchBar hidden={!q} forMobileSearch={true}/>
       <ContainerTtitle text={q}/>
       <BooksContainer data={response!} />
       <Pagination

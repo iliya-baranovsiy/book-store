@@ -1,12 +1,16 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import SearchIcon from "./../assets/icons/Search.png";
 import { getSearchBooks } from "../services/bookService";
+import { useSearchParams } from "react-router-dom";
 import type { TShortBookResponse } from "../types/bookResponses.types";
 import SearchResult from "./searchComponent";
 
-export default function SearchBar({ hidden }: { hidden: boolean }) {
+
+export default function SearchBar({ hidden, forMobileSearch=false }: { hidden: boolean,forMobileSearch?:boolean }) {
   const [search, setSearch] = useState("");
   const [books, setBooks] = useState<TShortBookResponse>();
+  const [, setSearchParams] = useSearchParams()
+  
   useEffect(() => {
     if (!search.trim()) return;
 
@@ -38,13 +42,27 @@ useEffect(() => {
     document.removeEventListener("mousedown", handleClickOutside);
   };
 }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!search.trim()) return;
+
+  setSearchParams({
+    page: "1",
+    q: search,
+  });
+
+  setBooks(undefined);
+  setSearch("")
+  }
+  
   return (
     <>
       <div
-        className={`${hidden ? "hidden" : ""} lg:ml-[13.48%] lg:mr-[9.38%] lg:w-[48.39%] h-14 border-2 border-grey 
+        className={`${hidden ? "hidden" : ""} ${forMobileSearch ? "lg:hidden w-full mb-0" : ""} lg:ml-[13.48%] lg:mr-[9.38%] lg:w-[48.39%] h-14 border-2 border-grey 
     flex flex-row items-center pl-5 w-full mb-78 lg:mb-0 relative`} ref={searchRef}
       >
-        <form className="w-[88.9%] h-full border-0">
+        <form className="w-[88.9%] h-full border-0" onSubmit={handleSubmit}>
           <input
             type="search"
             placeholder="Search"

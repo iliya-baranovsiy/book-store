@@ -19,7 +19,7 @@ export default function SearchResult({
 
   return (
     <div
-      className="absolute top-16 left-0 w-ful bg-white z-50 border border-grey"
+      className="absolute top-16 left-0 w-ful bg-white z-50 border border-grey hidden lg:block"
       onClick={closeWindows}
     >
       {books.items.map((book) => (
