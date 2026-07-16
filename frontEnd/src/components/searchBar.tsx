@@ -55,12 +55,15 @@ useEffect(() => {
   setBooks(undefined);
   setSearch("")
   }
+  const main_styles = "h-14 border-2 border-grey flex flex-row items-center pl-5"
+  const styles_default = `${hidden ? "hidden" : ""} lg:ml-[13.48%] lg:mr-[9.38%] lg:w-[48.39%] mb-78 lg:mb-0 relative w-full`
+  const mobile_styles = "lg:hidden mb-0 mt-14 md:mt-16 mx-[7.8%] md:mx-[5.2%]"
+    
   
   return (
     <>
       <div
-        className={`${hidden ? "hidden" : ""} ${forMobileSearch ? "lg:hidden w-full mb-0" : ""} lg:ml-[13.48%] lg:mr-[9.38%] lg:w-[48.39%] h-14 border-2 border-grey 
-    flex flex-row items-center pl-5 w-full mb-78 lg:mb-0 relative`} ref={searchRef}
+        className={`${forMobileSearch? mobile_styles: styles_default} ${main_styles}`} ref={searchRef}
       >
         <form className="w-[88.9%] h-full border-0" onSubmit={handleSubmit}>
           <input

@@ -27,7 +27,7 @@ export default function HomePage() {
   }
   return (
     <>
-      <SearchBar hidden={!q} forMobileSearch={true}/>
+      <SearchBar hidden={true} forMobileSearch={!!q}/>
       <ContainerTtitle text={q}/>
       <BooksContainer data={response!} />
       <Pagination
