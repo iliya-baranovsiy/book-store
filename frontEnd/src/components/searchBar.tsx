@@ -57,7 +57,7 @@ useEffect(() => {
           />
         </form>
         <img src={SearchIcon} alt="search" className="w-6 h-6" />
-        {books && books.items.length > 0 && <SearchResult books={books} closeWindows={() => {setBooks(undefined); setSearch("")}}/>}
+        {books && books.items.length > 0 && <SearchResult books={books} closeWindows={() => {setBooks(undefined); setSearch("")}} search={search}/>}
       </div>
       
     </>

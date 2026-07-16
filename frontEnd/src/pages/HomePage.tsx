@@ -10,24 +10,34 @@ export default function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const page = Number(searchParams.get("page") ?? 1);
+  const q = searchParams.get("q") ?? "";
 
-  const { data: response, isLoading } = useBooks(page);
+  const { data: response, isLoading } = useBooks(page, q);
 
   useEffect(() => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
-}, [page]);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [page, q]);
 
   if (isLoading) {
     return <div>Загрузка...</div>;
   }
   return (
     <>
-      <ContainerTtitle />
+      <ContainerTtitle text={q}/>
       <BooksContainer data={response!} />
-      <Pagination page={page} totalPages={response!.pages} setPage={(page) => setSearchParams({page: String(page)})}/>
+      <Pagination
+        page={page}
+        totalPages={response!.pages}
+        setPage={(page) =>
+          setSearchParams({
+            page: String(page),
+            ...(q && { q }),
+          })
+        }
+      />
       <SubscribeFormComponent />
     </>
   );

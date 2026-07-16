@@ -3,10 +3,11 @@ import type { TBookResponse } from "../types/bookResponses.types";
 import type { TBookDetailResponse } from "../types/bookResponses.types";
 import type { TShortBookResponse } from "../types/bookResponses.types";
 
-export async function getAllBooks(page: number): Promise<TBookResponse> {
+export async function getAllBooks(page: number, q?:string): Promise<TBookResponse> {
   const response = await api.get<TBookResponse>("/books", {
     params: {
       page,
+      ...(q && {q})
     },
   });
   return response.data;
