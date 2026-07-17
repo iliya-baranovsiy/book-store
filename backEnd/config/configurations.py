@@ -8,6 +8,8 @@ class Settings(BaseSettings):
     postgres_user: str
     postgres_password: str
     allow_origins: str
+    secret_jwt: str
+    jwt_name: str
 
     model_config = SettingsConfigDict(
         env_file=".env",
