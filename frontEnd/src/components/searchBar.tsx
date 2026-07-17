@@ -6,7 +6,7 @@ import type { TShortBookResponse } from "../types/bookResponses.types";
 import SearchResult from "./searchComponent";
 
 
-export default function SearchBar({ hidden, forMobileSearch=false }: { hidden: boolean,forMobileSearch?:boolean }) {
+export default function SearchBar({ hidden, forMobileSearch=false, setOpen }: { hidden: boolean,forMobileSearch?:boolean, setOpen?:React.Dispatch<React.SetStateAction<boolean>> }) {
   const [search, setSearch] = useState("");
   const [books, setBooks] = useState<TShortBookResponse>();
   const [, setSearchParams] = useSearchParams()
@@ -53,7 +53,8 @@ useEffect(() => {
   });
 
   setBooks(undefined);
-  setSearch("")
+  setSearch("");
+  setOpen?.(false);
   }
   const main_styles = "h-14 border-2 border-grey flex flex-row items-center pl-5"
   const styles_default = `${hidden ? "hidden" : ""} lg:ml-[13.48%] lg:mr-[9.38%] lg:w-[48.39%] mb-78 lg:mb-0 relative w-full`

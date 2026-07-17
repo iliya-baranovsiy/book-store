@@ -14,7 +14,9 @@
   --color-greytext: #A8A8A8;
 }
 
-input[type="search"]::-webkit-search-cancel-button {
+input[type="search"]::-webkit-search-cancel-button,
+input[type="email"]::-webkit-search-cancel-button,
+input[type="password"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
   appearance: none;
 }
