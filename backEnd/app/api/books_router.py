@@ -1,6 +1,6 @@
 from typing import Optional
 from fastapi import APIRouter, Query
-from busines_logic.responses_schemas.book_responses import BooksResponse, BookDetailResponse, BookShortResponse
+from busines_logic.schemas.responses_schemas.book_responses import BooksResponse, BookDetailResponse, BookShortResponse
 from busines_logic.services.book_service import BookService
 
 router = APIRouter(prefix='/books')

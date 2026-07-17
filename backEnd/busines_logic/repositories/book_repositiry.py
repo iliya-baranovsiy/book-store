@@ -2,7 +2,7 @@ import math
 from sqlalchemy.ext.asyncio import AsyncSession
 from database.engines import async_session
 from database.books.orm import BookOrm
-from ..responses_schemas.book_responses import BooksResponse, BookDetailResponse, BookShortResponse
+from busines_logic.schemas.responses_schemas.book_responses import BooksResponse, BookDetailResponse, BookShortResponse
 
 
 class BookRepository:
