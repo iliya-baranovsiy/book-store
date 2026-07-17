@@ -1,23 +1,48 @@
+import React, { useRef, useState } from "react";
 import InputField from "./inputField";
 import FormButton from "./buttonComponent";
+import { login } from "../../services/authUserService";
 
 export default function SignInFrom() {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const [status, setStatus] = useState("")
+
+  async function handleAuth(e: React.FormEvent) {
+    e.preventDefault();
+    const email = emailRef.current?.value || "";
+    const password = passwordRef.current?.value || "";
+
+    let responseStatus = await login(email, password)
+    if (responseStatus === 200){
+      setStatus("ok")
+      formRef.current?.reset()
+      return
+    }
+    else{
+      setStatus("Error")
+    }
+  }
+
   return (
     <div className="w-full mt-8 md:px-[5.9%]">
-      <form>
+      <form ref={formRef} onSubmit={handleAuth}>
         <div className="flex flex-col gap-4 mb-8 md:mb-10">
           <span className="text-black text-[16px] font-inter leading-8 font-bold">
             Email
           </span>
-          <InputField fieldName="Your Email" type="email" />
+          <InputField fieldName="Your Email" type="email" ref={emailRef}/>
           <span className="text-black text-[16px] font-inter leading-8 font-bold">
             Password
           </span>
-          <InputField fieldName="Your Password" type="password" />
+          <InputField fieldName="Your Password" type="password" ref={passwordRef}/>
           <span>Forgot password ?</span>
         </div>
         <FormButton text="SIGN IN" />
       </form>
+      <p>{status}</p>
     </div>
   );
 }
