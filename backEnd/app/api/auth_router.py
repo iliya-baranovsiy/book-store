@@ -26,4 +26,4 @@ async def login(data: LoginSchema, response: Response):
         samesite="lax"
     )
     response.status_code = 200
-    return response
+
