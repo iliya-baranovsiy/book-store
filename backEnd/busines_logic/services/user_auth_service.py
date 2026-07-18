@@ -29,3 +29,7 @@ class UserAuthService:
                 raise HTTPException(status_code=401, detail="Invalid email or password")
         else:
             raise HTTPException(status_code=401, detail="Invalid email or password")
+
+    async def is_user_exists(self, id: int):
+        data = await self._auth_repo.is_user_exists(id=id)
+        return data

@@ -25,3 +25,11 @@ class UserOrm:
         stmt = select(User).where(User.email == email)
         result = await session.execute(stmt)
         return DTOUserSchema.model_validate(result.scalar())
+
+    @staticmethod
+    async def is_user_exists_by_id(session: AsyncSession, id: int):
+        stmt = select(
+            exists().where(User.id == id)
+        )
+        res = await session.execute(stmt)
+        return res

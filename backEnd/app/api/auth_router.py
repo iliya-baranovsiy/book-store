@@ -1,11 +1,17 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from fastapi.responses import Response
 from busines_logic.services.user_auth_service import UserAuthService
 from busines_logic.schemas.requests_schemas.register_schemas import RegisterSchema
 from busines_logic.schemas.requests_schemas.login_schema import LoginSchema
 from config.configurations import settings
+from app.depends.user_depend import get_current_user
 
 router = APIRouter(prefix="/auth")
+
+
+@router.get("/me")
+async def get_me(user=Depends(get_current_user)):
+    return user
 
 
 @router.post("/register")
@@ -26,4 +32,3 @@ async def login(data: LoginSchema, response: Response):
         samesite="lax"
     )
     response.status_code = 200
-

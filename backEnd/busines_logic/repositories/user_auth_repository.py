@@ -21,3 +21,8 @@ class UserAuthRepository:
                 data = await self.orm.get_user_data(session=session, email=email)
                 return User(id=data.id, name=data.name, email=data.email, hash_password=data.password_hash)
             return None
+
+    async def is_user_exists(self, id: int):
+        async with self.session as session:
+            existing = await self.orm.is_user_exists_by_id(session=session, id=id)
+            return existing

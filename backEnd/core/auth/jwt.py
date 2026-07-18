@@ -13,3 +13,6 @@ class JWT:
 
     def create_token(self, user_id: str):
         return self.security.create_access_token(uid=user_id)
+
+
+jwt = JWT()
