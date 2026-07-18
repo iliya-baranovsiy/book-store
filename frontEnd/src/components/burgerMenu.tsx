@@ -2,12 +2,27 @@ import SearchBar from "./searchBar";
 import Button from "./bookComponents/buttonComponent";
 import BarComponent from "./barComponent";
 import CloseIcon from "../assets/icons/close.png";
+import { useAuth } from "../context/authContext";
+import { useNavigate } from "react-router-dom";
 
 export default function BurgerMenu({
   setOpen,
 }: {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate()
+
+  async function handleAuthClick() {
+    if (isAuthenticated) {
+      await logout();
+      setOpen(false);
+    } else {
+      navigate("/auth");
+      setOpen(false);
+    }
+  }
+
   return (
     <>
       <div
@@ -21,7 +36,7 @@ export default function BurgerMenu({
       </div>
       <div className="fixed left-0 flex flex-col min-h-screen top-26 w-full bg-white lg:hidden pt-14 px-[7.5%] md:px-[6.5%] z-50 md:w-[48%] md:left-auto md:right-0">
         <SearchBar hidden={false} />
-        <Button text="SIGN IN" />
+        <Button text={isAuthenticated ? "LOG OUT" : "SIGN IN"} handleClick={handleAuthClick}/>
       </div>
     </>
   );
