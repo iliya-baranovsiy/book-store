@@ -57,7 +57,7 @@ useEffect(() => {
   setOpen?.(false);
   }
   const main_styles = "h-14 border-2 border-grey flex flex-row items-center pl-5"
-  const styles_default = `${hidden ? "hidden" : ""} lg:ml-[13.48%] lg:mr-[9.38%] lg:w-[48.39%] mb-78 lg:mb-0 relative w-full`
+  const styles_default = `${hidden ? "hidden" : ""} lg:ml-[13.48%] lg:mr-[9.38%] lg:w-[48.39%] mb-9 md:mb-12 lg:mb-0 relative w-full`
   const mobile_styles = "lg:hidden mb-0 mt-14 md:mt-16 mx-[7.8%] md:mx-[5.2%]"
     
   

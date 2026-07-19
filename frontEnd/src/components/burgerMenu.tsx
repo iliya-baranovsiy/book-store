@@ -36,6 +36,10 @@ export default function BurgerMenu({
       </div>
       <div className="fixed left-0 flex flex-col min-h-screen top-26 w-full bg-white lg:hidden pt-14 px-[7.5%] md:px-[6.5%] z-50 md:w-[48%] md:left-auto md:right-0">
         <SearchBar hidden={false} />
+        {isAuthenticated? <div className="flex flex-col md:gap-12 gap-9 mb-38 items-center">
+          <a href="/favorites" className="font-head text-black text-[32px]">Favorites</a>
+          <a href="/cart" className="font-head text-black text-[32px]">Cart</a>
+        </div>:<div className="mb-66"></div>}
         <Button text={isAuthenticated ? "LOG OUT" : "SIGN IN"} handleClick={handleAuthClick}/>
       </div>
     </>
