@@ -29,6 +29,18 @@ async def login(data: LoginSchema, response: Response):
         value=token,
         httponly=True,
         secure=False,
-        samesite="lax"
+        samesite="lax",
+        path="/"
     )
     response.status_code = 200
+
+
+@router.post("/logout")
+async def logout(response: Response):
+    response.delete_cookie(
+        key=settings.jwt_name,
+        path="/",
+        secure=False,
+        httponly=True,
+        samesite="lax"
+    )
