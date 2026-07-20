@@ -20,7 +20,8 @@ export default function SignInFrom() {
     const email = emailRef.current?.value || "";
     const password = passwordRef.current?.value || "";
 
-    let responseStatus = await login(email, password)
+    try {
+      let responseStatus = await login(email, password)
     if (responseStatus === 200){
       setStatus("ok")
       formRef.current?.reset()
@@ -31,6 +32,11 @@ export default function SignInFrom() {
     else{
       setStatus("Error")
     }
+    }
+    catch{
+      setStatus("Error")
+    }
+    
   }
 
   return (

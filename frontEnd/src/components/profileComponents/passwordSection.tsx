@@ -1,18 +1,54 @@
-import { useRef } from "react";
+import React, { useRef, useState } from "react";
 import InputField from "../authCompoents/inputField";
 import BarComponent from "../barComponent";
 import FormButton from "../authCompoents/buttonComponent";
 import { Link } from "react-router-dom";
+import { updatePassword } from "../../services/userService";
+import { useAuth } from "../../context/authContext";
+import { useNavigate } from "react-router-dom";
 
 export default function PasswordSection() {
   const passwordRef = useRef<HTMLInputElement>(null)
   const newPasswordRef = useRef<HTMLInputElement>(null)
   const confirmNewPasswordref = useRef<HTMLInputElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
+  const [status, setStaus] = useState("")
+  const {  logout } = useAuth();
+  const navigate = useNavigate()
+
+  async function handleSubmit(e:React.FormEvent) {
+    e.preventDefault()
+
+    const password = passwordRef.current?.value || ""
+    const newPassword = newPasswordRef.current?.value || ""
+    const confirmPassword = confirmNewPasswordref.current?.value || ""
+    
+    if (newPassword !== confirmPassword){
+      setStaus("Passwords must be the identical")
+      return
+    }
+
+    try {
+      let responseCode = await updatePassword(password, newPassword)
+      if (responseCode===200){
+        await logout()
+        navigate("/auth")
+        return
+      }
+      else{
+        setStaus("Error")
+        return
+      }
+    }
+    catch{
+      setStaus("Error")
+      return
+    }
+  }
 
 
   return (
-    <form className="mb-14 md:mb-18" ref={formRef}>
+    <form className="mb-14 md:mb-18" ref={formRef} onSubmit={handleSubmit}>
       <div className="mb-14 md:mb-18">
         <div className="flex flex-col lg:w-[49.2%] gap-4.5 mb-4">
           <span className="text-[16px] text-black font-inter font-bold">
@@ -49,6 +85,7 @@ export default function PasswordSection() {
           </Link>
         </div>
       </div>
+      <span>{status}</span>
     </form>
   );
 }
