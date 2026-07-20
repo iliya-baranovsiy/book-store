@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, func
+from sqlalchemy import select, func, insert
 from sqlalchemy.orm import selectinload
-from database.books.models import Book, BookTag
+from database.books.models import Book, BookTag, Review
 from .dto.schemas import BookBaseSchema, BookDetailSchema, BookShortSchema
 
 
@@ -34,7 +34,7 @@ class BookOrm:
     async def get_book(session: AsyncSession, book_id: int):
         stmt = select(Book).options(
             selectinload(Book.authors),
-            selectinload(Book.reviews),
+            selectinload(Book.reviews).selectinload(Review.reviewer),
             selectinload(Book.tags)
         ).where(Book.id == book_id)
         result = await session.execute(stmt)
@@ -75,3 +75,8 @@ class BookOrm:
         if result:
             return [BookShortSchema.model_validate(book) for book in result.all()]
         return None
+
+    @staticmethod
+    async def add_review(session: AsyncSession, reviewer_id: int, review: str, rating: int, book_id: int):
+        stmt = insert(Review).values(reviewer_id=reviewer_id, review=review, rating=rating, book_id=book_id)
+        await session.execute(stmt)

@@ -34,3 +34,9 @@ class BookRepository:
                 return BookShortResponse(items=books)
         except:
             return None
+
+    async def add_review(self, reviewer_id: int, review: str, rating: int, book_id: int):
+        async with self.session as session:
+            await self.book_orm.add_review(session=session, reviewer_id=reviewer_id, review=review, rating=rating,
+                                           book_id=book_id)
+            await session.commit()

@@ -19,10 +19,20 @@ class TagSchema(BaseConfigSchema):
     tag: str
 
 
+class ReviewerSchema(BaseModel):
+    id: int
+    name: str
+    email: str
+
+    model_config = ConfigDict(
+        from_attributes=True
+    )
+
+
 class ReviewSchema(BaseModel):
     id: int
     book_id: int
-    reviewer_id: int
+    reviewer: ReviewerSchema
     review: str
     rating: int
 
@@ -31,5 +41,3 @@ class ReviewSchema(BaseModel):
         alias_generator=to_camel,
         populate_by_name=True
     )
-
-

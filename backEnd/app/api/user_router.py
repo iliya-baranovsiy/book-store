@@ -14,7 +14,6 @@ async def get_user_profile(user_data=Depends(get_user_main_data)):
 
 @router.patch("/profile")
 async def patch_profile(data: UpdateSchema, user_data=Depends(get_user_main_data)):
-    print("OK")
     service = UserService()
     return await service.update_password(id=user_data.id, email=user_data.email, password=data.password,
                                          new_password=data.new_password)

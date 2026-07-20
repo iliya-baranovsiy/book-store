@@ -15,7 +15,6 @@ async def get_current_user(payload: Any = Depends(jwt.security.access_token_requ
 
 
 async def get_user_main_data(payload: Any = Depends(jwt.security.access_token_required)):
-    print(payload.sub)
     uid = payload.sub
     user_data = await UserService().get_user_main_data(id=int(uid))
     if not user_data:

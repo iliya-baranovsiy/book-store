@@ -1,7 +1,9 @@
 from typing import Optional
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, Depends
 from busines_logic.schemas.responses_schemas.book_responses import BooksResponse, BookDetailResponse, BookShortResponse
 from busines_logic.services.book_service import BookService
+from app.depends.user_depend import get_user_main_data
+from busines_logic.schemas.requests_schemas.review_schema import ReviewSchema
 
 router = APIRouter(prefix='/books')
 
@@ -25,3 +27,11 @@ async def get_book(book_id: int):
     books_service = BookService()
     book = await books_service.get_book(book_id=book_id)
     return book
+
+
+@router.post("/review")
+async def add_review(review: ReviewSchema, user_data=Depends(get_user_main_data)):
+    books_service = BookService()
+    response = await books_service.add_review(reviewer_id=user_data.id, book_id=review.book_id, review=review.review,
+                                   rating=review.rating)
+    return response
