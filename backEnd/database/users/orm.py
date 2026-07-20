@@ -1,8 +1,8 @@
 from sqlalchemy.ext.asyncio.session import AsyncSession
 from sqlalchemy.dialects.postgresql import insert
-from sqlalchemy import select, exists
+from sqlalchemy import select, exists, update
 from .models import User
-from .dto.schemas import DTOUserSchema
+from .dto.schemas import DTOUserLoginSchema, DTOUserSchema
 
 
 class UserOrm:
@@ -24,7 +24,7 @@ class UserOrm:
     async def get_user_data(session: AsyncSession, email: str):
         stmt = select(User).where(User.email == email)
         result = await session.execute(stmt)
-        return DTOUserSchema.model_validate(result.scalar())
+        return DTOUserLoginSchema.model_validate(result.scalar())
 
     @staticmethod
     async def is_user_exists_by_id(session: AsyncSession, id: int):
@@ -33,3 +33,14 @@ class UserOrm:
         )
         res = await session.execute(stmt)
         return res
+
+    @staticmethod
+    async def get_user(session: AsyncSession, id: int):
+        stmt = select(User).where(User.id == id)
+        res = await session.execute(stmt)
+        return DTOUserSchema.model_validate(res.scalars().first())
+
+    @staticmethod
+    async def update_user_password(session: AsyncSession, id: int, password: str):
+        stmt = update(User).values(password_hash=password).where(User.id == id)
+        await session.execute(stmt)

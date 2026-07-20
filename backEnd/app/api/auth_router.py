@@ -30,7 +30,8 @@ async def login(data: LoginSchema, response: Response):
         httponly=True,
         secure=False,
         samesite="lax",
-        path="/"
+        path="/",
+        max_age=60 * 60 * 24 * 7
     )
     response.status_code = 200
 

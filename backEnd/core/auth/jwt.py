@@ -5,6 +5,7 @@ config = AuthXConfig()
 config.JWT_SECRET_KEY = settings.secret_jwt
 config.JWT_ACCESS_COOKIE_NAME = settings.jwt_name
 config.JWT_TOKEN_LOCATION = ["cookies"]
+config.JWT_COOKIE_CSRF_PROTECT = False
 
 
 class JWT:
