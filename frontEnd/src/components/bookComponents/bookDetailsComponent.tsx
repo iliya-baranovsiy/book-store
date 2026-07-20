@@ -35,7 +35,7 @@ export default function BookDetailsComponent({
           <TextComponent atr="Format" data={format} />
           <MoreDetailsComponent tags={tags}/>
         </div>
-        <Button text="ADD TO CART"/>
+        <Button text="ADD TO CART" handleClick={() => {}}/>
         <PreviewButtonComponent />
       </div>
     </div>

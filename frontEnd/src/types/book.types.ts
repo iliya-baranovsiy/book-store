@@ -1,3 +1,5 @@
+import type { TUser } from "./user.types";
+
 export type TBook = {
   id: number;
   title: string;
@@ -30,9 +32,9 @@ export type TTag = {
 export type TReview = {
   id: number;
   bookId: number;
-  reviewerId: number;
+  reviewer: TUser;
   review: string;
-  rating: string;
+  rating: number;
 };
 
 export type TShortBookData = {

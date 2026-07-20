@@ -30,3 +30,12 @@ export async function getSearchBooks(searchText: string):Promise<TShortBookRespo
   });
   return response.data;
 }
+
+export async function addReview(book_id:number, review:string, rating:number) {
+  const response = await api.post("/books/review", {
+    book_id,
+    review,
+    rating,
+  })
+  return response.status
+}

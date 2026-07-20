@@ -11,7 +11,6 @@ import SubscribeFormComponent from "../components/subscribeForm";
 import SlideMenu from "../components/bookComponents/slideMenu";
 import type { TTab } from "../types/tab.types.type";
 
-
 export default function BookPage() {
   const { id } = useParams();
   const { data: response, isLoading } = useBook(Number(id));
@@ -45,13 +44,19 @@ export default function BookPage() {
         format={response!.book.format}
         language={response!.book.language}
         publisher={response!.book.publisher}
-        tags={response!.book.tags.map((tag) => (tag.tag)).join(" ")}
+        tags={response!.book.tags.map((tag) => tag.tag).join(" ")}
       />
-      <TabSection tab={tab} setTab={setTab}/>
-      <TabContent tab={tab} authors={response!.book.authors} description={response!.book.description} reviews={response!.book.reviews}/>
+      <TabSection tab={tab} setTab={setTab} />
+      <TabContent
+        tab={tab}
+        authors={response!.book.authors}
+        description={response!.book.description}
+        reviews={response!.book.reviews}
+        bookId={Number(id)}
+      />
       <SocialMediaIcons />
       <SubscribeFormComponent />
-      <SlideMenu similarBooks={response!.similar}/>
+      <SlideMenu similarBooks={response!.similar} />
     </>
   );
 }
