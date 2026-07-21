@@ -6,6 +6,8 @@ import { useSaved } from "../../hooks/useBooks";
 import { useParams } from "react-router-dom";
 import { addSaved, deleteSaved } from "../../services/userService";
 import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
 
 export default function BookPictureComponent({ imgUrl }: { imgUrl: string }) {
   const { id } = useParams();
@@ -16,11 +18,18 @@ export default function BookPictureComponent({ imgUrl }: { imgUrl: string }) {
 
   const { data: saved } = useSaved();
 
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+
   useEffect(() => {
     setSaved(saved?.books.some((book) => book.id === Number(id)) ?? false);
   }, [saved, id]);
 
   async function handleClick() {
+    if (!isAuthenticated) {
+      navigate("/auth");
+      return;
+    }
     if (isSaved) {
       await deleteSaved(Number(id));
     } else {
