@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getAllBooks } from "../services/bookService";
 import { getBook } from "../services/bookService";
-import { getProfile } from "../services/userService";
+import { getProfile, getSaved } from "../services/userService";
 
 export function useBooks(page: number, q?: string) {
   return useQuery({
@@ -21,5 +21,12 @@ export function useProfile() {
   return useQuery({
     queryKey: ["user"],
     queryFn: () => getProfile(),
+  });
+}
+
+export function useSaved() {
+  return useQuery({
+    queryKey: ["saved"],
+    queryFn: () => getSaved(),
   });
 }

@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import CartIcon from "../assets/icons/cart.png";
 import ProfileIcon from "../assets/icons/profile.png";
 import SavedIcon from "../assets/icons/saved.png";
+import SavedFullIcon from "../assets/icons/savedFull.png"
 import MenuIcon from "../assets/icons/menu.png";
 import CloseIcon from "../assets/icons/close.png";
 import BurgerMenu from "./burgerMenu";
+import { useSaved } from "../hooks/useBooks";
 
 export default function IconsSet({
   isOpen,
@@ -13,11 +15,13 @@ export default function IconsSet({
   isOpen: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const {data: saved} = useSaved()
+  const hasSaved =( saved?.books.length ?? 0) >0
   return (
     <>
       <div className="flex flex-row md:gap-2">
         <Link to={"/saved"}>
-          <img src={SavedIcon} alt="saved" className="hidden lg:block"></img>
+          <img src={hasSaved? SavedFullIcon: SavedIcon} alt="saved" className="hidden lg:block"></img>
         </Link>
         <Link to={"/cart"}>
           <img
