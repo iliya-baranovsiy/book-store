@@ -1,8 +1,10 @@
+from fastapi.exceptions import HTTPException
+from fastapi.responses import Response
 from busines_logic.repositories.user_repository import UserRepository
 from busines_logic.repositories.user_auth_repository import UserAuthRepository
 from core.auth.hash_password import Hashing
-from fastapi.exceptions import HTTPException
-from fastapi.responses import Response
+from busines_logic.schemas.responses_schemas.book_responses import SavedBooksResponse
+from database.books.dto.schemas import BookBaseSchema
 
 
 class UserService:
@@ -24,3 +26,21 @@ class UserService:
                 return Response(status_code=200)
             else:
                 raise HTTPException(status_code=401, detail="Invalid email or password")
+
+    async def get_saved(self, user_id: int):
+        books = await self._user_repo.get_saved(user_id=user_id)
+        return SavedBooksResponse(books=[BookBaseSchema.model_validate(book) for book in books])
+
+    async def add_saved(self, book_id: int, user_id: int):
+        try:
+            await self._user_repo.add_to_saved(book_id=book_id, user_id=user_id)
+            return 201
+        except:
+            return 401
+
+    async def delete_from_saved(self, book_id: int, user_id: int):
+        try:
+            await self._user_repo.delete_from_saved(book_id=book_id, user_id=user_id)
+            return 200
+        except:
+            return 401

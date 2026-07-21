@@ -4,6 +4,7 @@ from sqlalchemy.orm import selectinload
 from sqlalchemy import select, exists, update, delete
 from .models import User, Saved
 from .dto.schemas import DTOUserLoginSchema, DTOUserSchema
+from ..books.models import Book
 
 
 class UserOrm:
@@ -48,7 +49,7 @@ class UserOrm:
 
     @staticmethod
     async def get_saved(session: AsyncSession, user_id: int):
-        stmt = select(User).options(selectinload(User.saved_books)).where(User.id == user_id)
+        stmt = select(User).options(selectinload(User.saved_books).selectinload(Book.authors)).where(User.id == user_id)
         res = await session.execute(stmt)
         return res.scalar().saved_books
 
