@@ -18,3 +18,19 @@ export async function getSaved() {
   const response = await api.get<TSavedBooks>("/user/saved");
   return response.data;
 }
+
+export async function addSaved(book_id: number) {
+  const response = await api.post("/user/saved", {
+    book_id,
+  });
+  return response.status;
+}
+
+export async function deleteSaved(book_id: number) {
+  const response = await api.delete("/user/saved", {
+    data: {
+      book_id,
+    },
+  });
+  return response.status;
+}
