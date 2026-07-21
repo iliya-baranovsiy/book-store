@@ -6,6 +6,7 @@ import BookPage from "../pages/BookPage";
 import AuthPage from "../pages/AuthPage";
 import ProfilePage from "../pages/ProfilePage";
 import ProtectedRoute from "../components/protectedRoute";
+import SavedPage from "../pages/savedPage";
 
 export const router = createBrowserRouter([
   {
@@ -17,7 +18,8 @@ export const router = createBrowserRouter([
       {
         element: <ProtectedRoute />,
         children: [
-          {path:"/profile", element: <ProfilePage />}
+          {path:"/profile", element: <ProfilePage />},
+          {path:"/saved",element: <SavedPage />}
         ]
       }
     ],
