@@ -32,6 +32,7 @@ class Book(Base):
     tags: Mapped[list["Tag"]] = relationship(secondary=BookTag.__table__, back_populates="books")
     reviews: Mapped[list["Review"]] = relationship("Review", back_populates="book", cascade="all, delete-orphan")
     authors: Mapped[list["Author"]] = relationship(secondary=BookAuthor.__table__, back_populates="books")
+    saved_by: Mapped[list["User"]] = relationship(secondary="saved_book", back_populates="saved_books")
 
     __table_args__ = (CheckConstraint("rating >= 0 AND rating <= 5",
                                       name="rating_range"),)
