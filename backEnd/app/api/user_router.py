@@ -4,6 +4,7 @@ from app.depends.user_depend import get_user_main_data
 from busines_logic.schemas.requests_schemas.update_schema import UpdateSchema
 from busines_logic.services.user_service import UserService
 from busines_logic.schemas.responses_schemas.book_responses import SavedBooksResponse
+from busines_logic.schemas.requests_schemas.saved_schema import SavedSchema
 
 router = APIRouter(prefix="/user")
 
@@ -28,13 +29,13 @@ async def get_saved(user_data=Depends(get_user_main_data)):
 
 
 @router.post("/saved", status_code=status.HTTP_201_CREATED)
-async def add_saved(book_id: int, user_data=Depends(get_user_main_data)):
+async def add_saved(data: SavedSchema, user_data=Depends(get_user_main_data)):
     service = UserService()
-    await service.add_saved(book_id=book_id, user_id=user_data.id)
+    await service.add_saved(book_id=data.book_id, user_id=user_data.id)
     return {"ok": "okey"}
 
 
 @router.delete("/saved", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_from_saved(book_id: int, user_data=Depends(get_user_main_data)):
+async def delete_from_saved(data: SavedSchema, user_data=Depends(get_user_main_data)):
     service = UserService()
-    await service.delete_from_saved(book_id=book_id, user_id=user_data.id)
+    await service.delete_from_saved(book_id=data.book_id, user_id=user_data.id)
