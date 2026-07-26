@@ -29,10 +29,10 @@ export default function HomePage() {
     <>
       <SearchBar hidden={true} forMobileSearch={!!q}/>
       <ContainerTtitle text={q}/>
-      <BooksContainer data={response!} />
+      {response && <BooksContainer data={response} />}
       <Pagination
         page={page}
-        totalPages={response!.pages}
+        totalPages={response?.pages ?? 1}
         setPage={(page) =>
           setSearchParams({
             page: String(page),
