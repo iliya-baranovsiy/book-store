@@ -7,7 +7,7 @@ COPY frontEnd/package*.json ./
 RUN npm ci
 
 COPY frontEnd/ .
-RUN npm run dev
+RUN npm run build
 
 
 # ---------- Stage 2: Nginx ----------
