@@ -37,14 +37,14 @@ export default function BookPage() {
         prevent_page={previousPage}
       />
       <BookInfoComponent
-        imgUrl={response!.book.picture_url}
-        rating={response!.book.rating}
-        cost={response!.book.cost}
-        authors={response!.book.authors.map((author) => author.name).join(", ")}
-        format={response!.book.format}
-        language={response!.book.language}
-        publisher={response!.book.publisher}
-        tags={response!.book.tags.map((tag) => tag.tag).join(" ")}
+        imgUrl={response?.book?.picture_url ?? ""}
+        rating={response?.book?.rating ?? 0}
+        cost={response?.book?.cost ?? 0}
+        authors={response?.book?.authors.map((author) => author.name).join(", ") ?? ""}
+        format={response?.book?.format ?? ""}
+        language={response?.book?.language ?? ""}
+        publisher={response?.book?.publisher ?? ""}
+        tags={response?.book?.tags.map((tag) => tag.tag).join(" ") ?? ""}
       />
       <TabSection tab={tab} setTab={setTab} />
       <TabContent
