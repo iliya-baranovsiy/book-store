@@ -2,12 +2,12 @@ services:
 
   backend:
     build:
-      context: ./backend
+      context: ./backEnd
 
     container_name: book_backend
 
     env_file:
-      - .env
+      - ./backEnd/.env
 
     expose:
       - "8000"
@@ -28,12 +28,7 @@ services:
     container_name: book_postgres
 
     env_file:
-      - .env
-
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      - ./backEnd/.env
 
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -68,7 +63,6 @@ services:
 
 
 volumes:
-
   postgres_data:
 
   uploads_data:
