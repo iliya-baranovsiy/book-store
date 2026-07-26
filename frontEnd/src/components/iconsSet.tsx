@@ -23,7 +23,7 @@ export default function IconsSet({
         <Link to={"/saved"}>
           <img src={hasSaved? SavedFullIcon: SavedIcon} alt="saved" className="hidden lg:block"></img>
         </Link>
-        <Link to={"/cart"}>
+        <Link to={"/"}>
           <img
             src={CartIcon}
             alt="cart"
