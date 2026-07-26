@@ -90,7 +90,7 @@ export default function SlideMenu({ similarBooks }: { similarBooks: TBook[] }) {
               <BookComponent
                 title={book.title}
                 imgUrl={book.picture_url}
-                author={book.author}
+                author={book.authors.map((author) => (author.name)).join("")}
                 publisher={book.publisher}
                 cost={book.cost}
                 rating={book.rating}
