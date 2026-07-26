@@ -16,7 +16,7 @@ export default function IconsSet({
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const {data: saved} = useSaved()
-  const hasSaved =( saved?.books.length ?? 0) >0
+  const hasSaved =( saved?.books?.length ?? 0) >0
   return (
     <>
       <div className="flex flex-row md:gap-2">
