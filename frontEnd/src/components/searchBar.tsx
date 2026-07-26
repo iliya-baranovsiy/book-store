@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import SearchIcon from "./../assets/icons/Search.png";
+import SearchIcon from "./../assets/icons/search.png";
 import { getSearchBooks } from "../services/bookService";
 import { useSearchParams } from "react-router-dom";
 import type { TShortBookResponse } from "../types/bookResponses.types";
