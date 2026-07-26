@@ -28,7 +28,7 @@ async def login(data: LoginSchema, response: Response):
         key=settings.jwt_name,
         value=token,
         httponly=True,
-        secure=False,
+        secure=True,
         samesite="lax",
         path="/",
         max_age=60 * 60 * 24 * 7
