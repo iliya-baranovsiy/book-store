@@ -33,7 +33,7 @@ export default function BookPage() {
   return (
     <>
       <BookTitleComponent
-        title={response!.book.title}
+        title={response?.book?.title ?? ""}
         prevent_page={previousPage}
       />
       <BookInfoComponent
